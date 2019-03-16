@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { RoadDefinition, Road } from './road-definition.constants';
-import { GameConstants } from '../constants/game-constants.constants';
 import { GameTile } from './game-tile/game-tile';
+import { GameConstants } from '../game-constants/game-constants.constants';
+import { RoadDefinition, Road } from '../game-constants/road-definition.constants';
 
 @Component({
-  selector: 'app-gameBoard',
-  templateUrl: './gameBoard.component.html',
-  styleUrls: ['./gameBoard.component.css']
+  selector: 'app-game-board',
+  templateUrl: './game-board.component.html',
+  styleUrls: ['./game-board.component.css']
 })
 export class GameBoardComponent implements OnInit {
   public columns: Array<GameTile> = new Array(GameConstants.TOTAL_COLUMNS);

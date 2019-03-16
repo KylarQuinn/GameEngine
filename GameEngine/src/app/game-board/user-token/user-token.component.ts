@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameTile } from '../gameBoard/game-tile/game-tile';
+import { GameTile } from '../game-tile/game-tile';
 
 @Component({
   selector: 'app-user-token',
@@ -14,7 +14,6 @@ export class UserTokenComponent implements OnInit {
     this.movement = 3;
     this.location = new GameTile(0, 1);
   }
-
   ngOnInit() {
   }
 

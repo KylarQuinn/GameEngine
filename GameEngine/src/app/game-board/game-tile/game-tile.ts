@@ -1,4 +1,4 @@
-import { GameConstants } from '../../constants/game-constants.constants';
+import { GameConstants } from '../../game-constants/game-constants.constants';
 
 export class GameTile {
   public tileNumber: number;

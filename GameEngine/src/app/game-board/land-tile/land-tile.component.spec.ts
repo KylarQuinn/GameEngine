@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoadGameTileComponent } from './road-game-tile.component';
+import { LandTileComponent } from './land-tile.component';
 
-describe('RoadGameTileComponent', () => {
-  let component: RoadGameTileComponent;
-  let fixture: ComponentFixture<RoadGameTileComponent>;
+describe('LandTileComponent', () => {
+  let component: LandTileComponent;
+  let fixture: ComponentFixture<LandTileComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RoadGameTileComponent ]
+      declarations: [ LandTileComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RoadGameTileComponent);
+    fixture = TestBed.createComponent(LandTileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

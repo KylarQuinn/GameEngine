@@ -1,5 +1,5 @@
-import { GameTile } from './game-tile/game-tile';
-import { GameConstants } from '../constants/game-constants.constants';
+import { GameTile } from '../game-board/game-tile/game-tile';
+import { GameConstants } from './game-constants.constants';
 
 export class Road {
   public static SouthRoad: Array<GameTile> = [

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SeaGameTileComponent } from './sea-game-tile.component';
+import { SeaTileComponent } from './sea-tile.component';
 
-describe('SeaGameTileComponent', () => {
-  let component: SeaGameTileComponent;
-  let fixture: ComponentFixture<SeaGameTileComponent>;
+describe('SeaTileComponent', () => {
+  let component: SeaTileComponent;
+  let fixture: ComponentFixture<SeaTileComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeaGameTileComponent ]
+      declarations: [ SeaTileComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SeaGameTileComponent);
+    fixture = TestBed.createComponent(SeaTileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
