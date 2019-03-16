@@ -1,0 +1,24 @@
+<div>
+  <table>
+    <tbody>
+      <tr *ngFor="let row of rows; let rowIndex = index">
+        <td *ngFor="let column of columns; let colIndex = index">
+          <div [ngSwitch]="getTileType(rowIndex,colIndex)">
+            <div *ngSwitchCase="'SeaTile'">
+              <app-sea-game-tile></app-sea-game-tile>
+            </div>
+            <div *ngSwitchCase="'LandTile'">
+              <app-land-game-tile></app-land-game-tile>
+            </div>
+            <div *ngSwitchCase="'RoadTile'">
+              <app-road-game-tile></app-road-game-tile>
+            </div>
+            <div *ngSwitchDefault>
+              <app-user-token></app-user-token>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
