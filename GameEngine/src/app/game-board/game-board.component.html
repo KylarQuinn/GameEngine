@@ -1,4 +1,4 @@
-<div>
+<div class='scrollable'>
   <table>
     <tbody>
       <tr *ngFor="let row of rows; let rowIndex = index">
@@ -12,6 +12,9 @@
             </div>
             <div *ngSwitchCase="'RoadTile'">
               <app-road-tile></app-road-tile>
+            </div>
+            <div *ngSwitchCase="'UserTile'">
+              <app-user-token></app-user-token>
             </div>
             <div *ngSwitchDefault>
               <app-user-token></app-user-token>

@@ -3,7 +3,8 @@ import { GameConstants } from './game-constants.constants';
 export class Road {
   // Todo:  Think about reformatting.
   public static SouthRoad: Array<number> = [
-    5000, 4975, 4975, 4976, 4977, 4978, 4979, 4980, 4981, 4982, 4983, 4984, 4985, 4986, 4987
+    4975, 4950, 4951, 4952, 4953, 4954, 4955, 4956, 4957, 4958, 4959, 4960, 4961, 4962
+
   ];
 
   public static contains(road: Array<number>, rowIndex: number, columnIndex: number): boolean {

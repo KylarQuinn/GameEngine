@@ -21,6 +21,13 @@ export class GameBoardService {
     return this.activeGameBoard;
   }
 
+  /**
+   * getMovementAmount
+   */
+  public getMovementAmount(): number {
+    return this.activeGameBoard.getMovementAmount();
+  }
+
   public makeMove(movement: Array<number>): number {
     let currentGameTile: GameTile;
     let endLocation: number;
@@ -39,7 +46,25 @@ export class GameBoardService {
    * getTileType
    */
   public getTileType(rowIndex: number, colIndex: number): string {
-    return this.activeGameBoard.gameBoard[rowIndex * GameConstants.TOTAL_COLUMNS + colIndex].getTileType(rowIndex, colIndex);
+    let tileType = this.activeGameBoard.getTileType(rowIndex, colIndex);
+    if (rowIndex * GameConstants.TOTAL_COLUMNS + colIndex === this.activeGameBoard.getUserPosition()) {
+      tileType = 'UserToken';
+    }
+    return tileType;
   }
 
+  public onArrowUp() {
+    let currentPosition = this.activeGameBoard.getUserPosition();
+
+  }
+  public onArrowDown() {
+
+  }
+  public onArrowRight() {
+
+  }
+
+  public onArrowLeft() {
+
+  }
 }

@@ -22,4 +22,5 @@ export class GameBoardComponent implements OnInit {
   getTileType(rowIndex: number, colIndex: number): string {
     return this.gameBoard.getTileType(rowIndex, colIndex);
   }
+
 }
