@@ -15,25 +15,62 @@ export class GameBoard {
 
     }
     this.movementAmount = 3;
-    this.setUserToken(GameConstants.TalonLocation, null);
+    this.setUserToken(GameConstants.TalonLocation);
   }
 
   /**
    * setUserToken
    */
-  public setUserToken(destinationLocation: number, movementAmount: number) {
-    if (movementAmount !== null) {
-      this.validateMovement(destinationLocation, movementAmount);
-      this.userPosition = destinationLocation;
-    } else { this.userPosition = destinationLocation; }
-    return;
+  public setUserToken(destinationLocation: number) {
+    this.userPosition = destinationLocation;
   }
 
   /**
-   * validateMovement
+   * commitValidMove
    */
-  public validateMovement(destinationLocation: number, movementAmount: number) {
+  public commitValidDownMove(): number {
+    const currentTile = this.gameBoard[this.userPosition];
+    if (currentTile.rowIndex !== GameConstants.TOTAL_ROWS) {
+      this.setUserToken(this.userPosition + GameConstants.TOTAL_COLUMNS);
+      this.movementAmount -= 1;
+    }
+    return this.movementAmount;
+  }
 
+  /**
+   * commitValidMove
+   */
+  public commitValidUpMove(): number {
+    const currentTile = this.gameBoard[this.userPosition];
+    if (currentTile.rowIndex !== 0) {
+      this.setUserToken(this.userPosition - GameConstants.TOTAL_COLUMNS);
+      this.movementAmount -= 1;
+    }
+    return this.movementAmount;
+  }
+
+  /**
+   * commitValidMove
+   */
+  public commitValidLeftMove(): number {
+    const currentTile = this.gameBoard[this.userPosition];
+    if (currentTile.colIndex !== 0) {
+      this.setUserToken(this.userPosition - 1);
+      this.movementAmount -= 1;
+    }
+    return this.movementAmount;
+  }
+
+  /**
+   * commitValidMove
+   */
+  public commitValidRightMove(): number {
+    const currentTile = this.gameBoard[this.userPosition];
+    if (currentTile.rowIndex !== GameConstants.TOTAL_COLUMNS) {
+      this.setUserToken(this.userPosition + 1);
+      this.movementAmount -= 1;
+    }
+    return this.movementAmount;
   }
 
   /**
@@ -46,8 +83,8 @@ export class GameBoard {
   /**
    * getMovementAmount
    */
-  public getMovementAmount(): number {
-    return this.movementAmount;
+  public getMovementAmount(movement: number): number {
+    return this.commitValidMove(movement);
   }
 
   public getTileType(rowIndex: number, colIndex: number): string {

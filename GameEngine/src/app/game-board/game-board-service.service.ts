@@ -24,7 +24,7 @@ export class GameBoardService {
   /**
    * getMovementAmount
    */
-  public getMovementAmount(): number {
+  public commitMoves(): number {
     return this.activeGameBoard.getMovementAmount();
   }
 
@@ -53,18 +53,19 @@ export class GameBoardService {
     return tileType;
   }
 
-  public onArrowUp() {
-    let currentPosition = this.activeGameBoard.getUserPosition();
-
-  }
-  public onArrowDown() {
-
-  }
-  public onArrowRight() {
-
+  public onArrowUp(): number {
+    return this.activeGameBoard.commitValidUpMove();
   }
 
-  public onArrowLeft() {
+  public onArrowDown(): number {
+    return this.activeGameBoard.commitValidDownMove();
+  }
 
+  public onArrowRight(): number {
+    return this.activeGameBoard.commitValidRightMove();
+  }
+
+  public onArrowLeft(): number {
+    return this.activeGameBoard.getUserPosition();
   }
 }

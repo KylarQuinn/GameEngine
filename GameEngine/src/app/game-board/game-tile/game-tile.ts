@@ -2,13 +2,17 @@ import { GameConstants } from '../../game-constants/game-constants.constants';
 import { Road } from 'src/app/game-constants/road-definition.constants';
 
 export class GameTile {
+  public rowIndex: number;
+  public colIndex: number;
   public tileNumber: number;
   private leaveEvent: boolean;
   private displayText: string;
   private tileType: string;
 
-  constructor(rowIndex: number, columnIndex: number, randomTile: boolean) {
-    this.tileNumber = rowIndex * GameConstants.TOTAL_COLUMNS + columnIndex;
+  constructor(rowIndex: number, colIndex: number, randomTile: boolean) {
+    this.rowIndex = rowIndex;
+    this.colIndex = colIndex;
+    this.tileNumber = rowIndex * GameConstants.TOTAL_COLUMNS + colIndex;
     if (this.tileNumber === 2) {
       this.leaveEvent = true;
     }
