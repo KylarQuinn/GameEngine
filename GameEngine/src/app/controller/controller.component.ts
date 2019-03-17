@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GameBoardService } from '../game-board/game-board-service.service';
-import { GameBoard } from '../game-board/game-board';
 
 @Component({
   selector: 'app-controller',
@@ -32,7 +31,7 @@ export class ControllerComponent implements OnInit {
     this.movementAmount = this.gameBoardService.onArrowLeft();
   }
 
-  onCommitMoves(){
+  onCommitMoves() {
     this.gameBoardService.commitMoves();
   }
 }
