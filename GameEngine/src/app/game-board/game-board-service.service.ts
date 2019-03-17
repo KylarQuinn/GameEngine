@@ -2,14 +2,21 @@ import { Injectable } from '@angular/core';
 import { GameTile } from './game-tile/game-tile';
 import { GameConstants } from '../game-constants/game-constants.constants';
 import { GameBoard } from './game-board';
+import { Subject, Observable } from 'rxjs';
+import { UserTokenComponent } from './user-token/user-token.component';
 
 @Injectable()
 export class GameBoardService {
   private displayText: string;
   private activeGameBoard: GameBoard;
+  private movesToCommit: Array<number>;
+  private userTokenMovementSource: Subject<void>;
+  public movementEnd$: Observable<void>;
 
   constructor() {
     this.activeGameBoard = new GameBoard();
+    this.userTokenMovementSource = new Subject<void>();
+    this.movementEnd$ = this.userTokenMovementSource.asObservable();
   }
 
   // Used when I figure out a save system
@@ -22,10 +29,29 @@ export class GameBoardService {
   }
 
   /**
-   * getMovementAmount
+   * getMovesToCommit
+   */
+  public getMovesToCommit() {
+    return this.movesToCommit;
+  }
+
+  /**
+   * getCurrentMovementAmount
+   */
+  public getCurrentMovementAmount(): number {
+    return this.activeGameBoard.getCurrentMovementAmount();
+  }
+  /**
+   * commitMoves
    */
   public commitMoves(): number {
-    return this.activeGameBoard.getMovementAmount();
+    this.userTokenMovementSource.next();
+    return this.activeGameBoard.getCurrentMovementAmount();
+
+  }
+
+  public getMoves(): Array<number> {
+    return this.movesToCommit;
   }
 
   public makeMove(movement: Array<number>): number {

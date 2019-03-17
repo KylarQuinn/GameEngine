@@ -5,6 +5,7 @@ export class GameBoard {
   public gameBoard: Array<GameTile>;
   private userPosition: number;
   private movementAmount: number;
+  private currentMovementAmount: number;
 
   constructor() {
     this.gameBoard = new Array<GameTile>(GameConstants.TOTAL_COLUMNS * GameConstants.TOTAL_ROWS);
@@ -18,13 +19,7 @@ export class GameBoard {
     this.setUserToken(GameConstants.TalonLocation);
   }
 
-  /**
-   * setUserToken
-   */
-  public setUserToken(destinationLocation: number) {
-    this.userPosition = destinationLocation;
-  }
-
+  //#region ArrowMovement
   /**
    * commitValidMove
    */
@@ -73,6 +68,14 @@ export class GameBoard {
     return this.movementAmount;
   }
 
+  //#endregion
+
+  /**
+   * setUserToken
+   */
+  public setUserToken(destinationLocation: number) {
+    this.userPosition = destinationLocation;
+  }
   /**
    * getUserPosition
    */
@@ -81,10 +84,10 @@ export class GameBoard {
   }
 
   /**
-   * getMovementAmount
+   * getCurrentMovementAmount
    */
-  public getMovementAmount(movement: number): number {
-    return this.commitValidMove(movement);
+  public getCurrentMovementAmount() {
+    return this.currentMovementAmount;
   }
 
   public getTileType(rowIndex: number, colIndex: number): string {

@@ -7,7 +7,7 @@ import { GameBoardService } from '../game-board/game-board-service.service';
   styleUrls: ['./controller.component.css']
 })
 export class ControllerComponent implements OnInit {
-
+  public movesToCommit: Array<number>;
   public movementAmount: number;
 
   constructor(private gameBoardService: GameBoardService) { }
@@ -17,6 +17,7 @@ export class ControllerComponent implements OnInit {
 
   onArrowUp(event: any) {
     this.movementAmount = this.gameBoardService.onArrowUp();
+    this.movesToCommit = this.gameBoardService.getMovesToCommit();
   }
 
   onArrowDown(event: any) {
@@ -33,5 +34,10 @@ export class ControllerComponent implements OnInit {
 
   onCommitMoves() {
     this.gameBoardService.commitMoves();
+    // Battles?
+    // Event?
+    // change location
+    // remove the overlay
+    this.movementAmount = this.gameBoardService.getCurrentMovementAmount();
   }
 }
