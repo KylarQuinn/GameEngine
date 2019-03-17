@@ -8,6 +8,8 @@ import { UserTokenComponent } from './game-board/user-token/user-token.component
 import { SeaTileComponent } from './game-board/sea-tile/sea-tile.component';
 import { LandTileComponent } from './game-board/land-tile/land-tile.component';
 import { RoadTileComponent } from './game-board/road-tile/road-tile.component';
+import { GameBoardService } from './game-board/game-board-service.service';
+import { ControllerComponent } from './controller/controller.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,13 @@ import { RoadTileComponent } from './game-board/road-tile/road-tile.component';
     UserTokenComponent,
     SeaTileComponent,
     LandTileComponent,
-    RoadTileComponent
+    RoadTileComponent,
+    ControllerComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [GameBoardService],
   bootstrap: [AppComponent, GameBoardComponent]
 })
 export class AppModule { }

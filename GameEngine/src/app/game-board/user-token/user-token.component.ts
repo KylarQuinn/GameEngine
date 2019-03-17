@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GameTile } from '../game-tile/game-tile';
+import { GameBoard } from '../game-board';
+import { GameConstants } from 'src/app/game-constants/game-constants.constants';
+import { GameBoardService } from '../game-board-service.service';
 
 @Component({
   selector: 'app-user-token',
@@ -7,14 +10,21 @@ import { GameTile } from '../game-tile/game-tile';
   styleUrls: ['./user-token.component.css']
 })
 export class UserTokenComponent implements OnInit {
+  private movementAmount: number;
+  private movement: Array<number>; // Tile numbers to move across. from top left tile to one diagonal right: 0, 1, 26
+  public location: number;
 
-  public movement: number;
-  public location: GameTile;
-  constructor() {
-    this.movement = 3;
-    this.location = new GameTile(0, 1);
+  constructor(private gameBoard: GameBoardService) {
+    this.movementAmount = 3;
+    this.location = GameConstants.TalonLocation;
   }
   ngOnInit() {
   }
 
+  /**
+   * executeMove
+   */
+  public executeMove() {
+
+  }
 }

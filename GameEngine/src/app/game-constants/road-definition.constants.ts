@@ -1,40 +1,14 @@
-import { GameTile } from '../game-board/game-tile/game-tile';
 import { GameConstants } from './game-constants.constants';
 
 export class Road {
-  public static SouthRoad: Array<GameTile> = [
-    new GameTile(GameConstants.TOTAL_ROWS, 0),
-    new GameTile(GameConstants.TOTAL_ROWS - 1, 0),
-    new GameTile(GameConstants.TOTAL_ROWS - 2, 0),
-    new GameTile(GameConstants.TOTAL_ROWS - 2, 1),
-    new GameTile(GameConstants.TOTAL_ROWS - 2, 2),
-    new GameTile(GameConstants.TOTAL_ROWS - 2, 3),
-    new GameTile(GameConstants.TOTAL_ROWS - 2, 4),
-    new GameTile(GameConstants.TOTAL_ROWS - 2, 5),
-    new GameTile(GameConstants.TOTAL_ROWS - 2, 6),
-    new GameTile(GameConstants.TOTAL_ROWS - 2, 7),
-    new GameTile(GameConstants.TOTAL_ROWS - 2, 8)
+  // Todo:  Think about reformatting.
+  public static SouthRoad: Array<number> = [
+    4975, 4950, 4951, 4952, 4953, 4954, 4955, 4956, 4957, 4958, 4959, 4960, 4961, 4962
   ];
-  public road: Array<GameTile>;
+
+  public static contains(road: Array<number>, rowIndex: number, columnIndex: number): boolean {
+    return road.includes(rowIndex * GameConstants.TOTAL_COLUMNS + columnIndex);
+  }
 
   constructor() { }
-}
-
-export class RoadDefinition implements Road {
-  public road: Array<GameTile>;
-
-  constructor(road: Array<GameTile>) {
-    this.road = road;
-  }
-
-  public contains(rowIndex: number, columnIndex: number): boolean {
-    let found = false;
-    this.road.forEach(tile => {
-      if (rowIndex * GameConstants.TOTAL_COLUMNS + columnIndex === tile.tileNumber) {
-        found = true;
-      }
-    });
-
-    return found;
-  }
 }
