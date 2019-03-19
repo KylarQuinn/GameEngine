@@ -41,7 +41,10 @@ export class ControllerComponent implements OnInit {
   }
 
   onCommitMoves() {
-    this.gameBoardService.commitMoves();
+    for (let m of this.movesToCommit) {
+      this.gameBoardService.commitMoves(m);
+    }
+
     // Battles?
     // Event?
     // change location

@@ -14,7 +14,7 @@ export class GameBoardService {
 
   constructor() {
     this.activeGameBoard = new GameBoard();
-    this.movesToCommit = new Array<number>();
+    this.movesToCommit = [GameConstants.TalonLocation];
   }
 
   // Used when I figure out a save system
@@ -43,15 +43,14 @@ export class GameBoardService {
   /**
    * commitMoves
    */
-  public commitMoves(): number {
-    const currentUserTile = this.activeGameBoard[this.activeGameBoard.getUserPosition()];
-    this.userMovementInfo = {
-      rowIndex: currentUserTile.rowIndex,
-      colIndex: currentUserTile.colIndex,
-      movesToCommit: this.movesToCommit
-    };
-    return this.activeGameBoard.getCurrentMovementAmount();
+  public commitMoves(move: number): number {
+    let currentTile: GameTile;
+    this.activeGameBoard.setUserToken(move);
+    currentTile = this.activeGameBoard.gameBoard[this.activeGameBoard.getUserPosition()];
+    setTimeout(() => { }, 5000);
 
+    this.movesToCommit = [currentTile.tileNumber];
+    return this.activeGameBoard.getCurrentMovementAmount();
   }
 
   public getMoves(): Array<number> {
