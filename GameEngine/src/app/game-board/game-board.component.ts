@@ -13,11 +13,13 @@ export class GameBoardComponent implements OnInit {
   public columns: Array<GameTile> = new Array(GameConstants.TOTAL_COLUMNS);
   public rows: Array<GameTile> = new Array(GameConstants.TOTAL_ROWS);
   private userTokenMovement: Subscription = null;
+  private userMovementInformation: any;
 
   constructor(private gameBoard: GameBoardService) {
-    this.userTokenMovement = this.gameBoard.movementEnd$.subscribe((movementPair) => {
+    // this.userTokenMovement = this.gameBoard.movementEnd$.subscribe((movementPair) => {
       // the event should emit data such that I can change the board accordingly
-    })
+      this.userMovementInformation = gameBoard.getUserMovementInfo();
+   // });
   }
 
   ngOnInit() {
@@ -27,6 +29,5 @@ export class GameBoardComponent implements OnInit {
   getTileType(rowIndex: number, colIndex: number): string {
     return this.gameBoard.getTileType(rowIndex, colIndex);
   }
-
 
 }

@@ -1,19 +1,27 @@
 <div class="alignBottom">
   MovementAmount = {{movementAmount}}
   <br>
+  CurrentMoves = <ul>
+    <li *ngFor='let move of movesToCommit'>{{move}}</li>
+  </ul>
   <table>
     <tr>
       <td></td>
-      <td><img width='50' class='button' float='right' src='../../assets/up.png' (click)="onArrowUp($event)" /></td>
+      <td><img width='50' class='alignCenter' src='../../assets/up.png' (click)="onArrowUp($event)" /></td>
       <td></td>
     </tr>
     <tr>
       <td>
-        <img width="50" class='button' src='../../assets/left.png' (click)="onArrowLeft($event)" /></td>
+        <img width="50" src='../../assets/left.png' (click)="onArrowLeft($event)" /></td>
       <td>
-        <img width="50" class='button' src='../../assets/down.png' (click)="onArrowDown($event)" /></td>
+        <img class='alignCenter' width="50" src='../../assets/down.png' (click)="onArrowDown($event)" /></td>
       <td>
-        <img width="50" class='button' src='../../assets/right.png' (click)="onArrowRight($event)" /></td>
+        <img class='floatRight' width="50" src='../../assets/right.png' (click)="onArrowRight($event)" /></td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <input class='button' (click)='onConfirm()' value="Complete Moves">
+      </td>
     </tr>
   </table>
 </div>

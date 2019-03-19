@@ -10,13 +10,11 @@ export class GameBoardService {
   private displayText: string;
   private activeGameBoard: GameBoard;
   private movesToCommit: Array<number>;
-  private userTokenMovementSource: Subject<void>;
-  public movementEnd$: Observable<void>;
+  private userMovementInfo: any;
 
   constructor() {
     this.activeGameBoard = new GameBoard();
-    this.userTokenMovementSource = new Subject<void>();
-    this.movementEnd$ = this.userTokenMovementSource.asObservable();
+    this.movesToCommit = new Array<number>();
   }
 
   // Used when I figure out a save system
@@ -41,17 +39,30 @@ export class GameBoardService {
   public getCurrentMovementAmount(): number {
     return this.activeGameBoard.getCurrentMovementAmount();
   }
+
   /**
    * commitMoves
    */
   public commitMoves(): number {
-    this.userTokenMovementSource.next();
+    const currentUserTile = this.activeGameBoard[this.activeGameBoard.getUserPosition()];
+    this.userMovementInfo = {
+      rowIndex: currentUserTile.rowIndex,
+      colIndex: currentUserTile.colIndex,
+      movesToCommit: this.movesToCommit
+    };
     return this.activeGameBoard.getCurrentMovementAmount();
 
   }
 
   public getMoves(): Array<number> {
     return this.movesToCommit;
+  }
+
+  /**
+   * getUserMovementInfo
+   */
+  public getUserMovementInfo(): any {
+    return this.userMovementInfo;
   }
 
   public makeMove(movement: Array<number>): number {
@@ -79,19 +90,68 @@ export class GameBoardService {
     return tileType;
   }
 
+  // Try to refactor these into common methods
   public onArrowUp(): number {
-    return this.activeGameBoard.commitValidUpMove();
+    let currentMovementAmount: number = this.activeGameBoard.getCurrentMovementAmount();
+    if (this.movesToCommit.length < currentMovementAmount) {
+      const userPosition = this.activeGameBoard.getUserPosition();
+      const currentTile = this.activeGameBoard.gameBoard[userPosition];
+      if (currentTile.rowIndex !== 0) {
+        const newPosition = userPosition - GameConstants.TOTAL_COLUMNS;
+        this.movesToCommit.push(newPosition);
+        this.activeGameBoard.setUserToken(newPosition);
+        this.activeGameBoard.commitValidMove();
+        currentMovementAmount -= 1;
+      }
+    }
+    return currentMovementAmount;
   }
 
   public onArrowDown(): number {
-    return this.activeGameBoard.commitValidDownMove();
+    let currentMovementAmount: number = this.activeGameBoard.getCurrentMovementAmount();
+    if (this.movesToCommit.length < currentMovementAmount) {
+      const userPosition = this.activeGameBoard.getUserPosition();
+      const currentTile = this.activeGameBoard.gameBoard[userPosition];
+      if (currentTile.rowIndex !== GameConstants.TOTAL_ROWS + GameConstants.TOTAL_COLUMNS) {
+        const newPosition = userPosition - GameConstants.TOTAL_COLUMNS;
+        this.movesToCommit.push(newPosition);
+        this.activeGameBoard.setUserToken(newPosition);
+        this.activeGameBoard.commitValidMove();
+        currentMovementAmount -= 1;
+      }
+    }
+    return currentMovementAmount;
   }
 
   public onArrowRight(): number {
-    return this.activeGameBoard.commitValidRightMove();
+    let currentMovementAmount: number = this.activeGameBoard.getCurrentMovementAmount();
+    if (this.movesToCommit.length < currentMovementAmount) {
+      const userPosition = this.activeGameBoard.getUserPosition();
+      const currentTile = this.activeGameBoard.gameBoard[userPosition];
+      if (currentTile.colIndex !== GameConstants.TOTAL_COLUMNS - 1) {
+        const newPosition = userPosition + 1;
+        this.movesToCommit.push(newPosition);
+        this.activeGameBoard.setUserToken(newPosition);
+        this.activeGameBoard.commitValidMove();
+        currentMovementAmount -= 1;
+      }
+    }
+    return currentMovementAmount;
   }
 
   public onArrowLeft(): number {
-    return this.activeGameBoard.getUserPosition();
+    let currentMovementAmount: number = this.activeGameBoard.getCurrentMovementAmount();
+    if (this.movesToCommit.length < currentMovementAmount) {
+      const userPosition = this.activeGameBoard.getUserPosition();
+      const currentTile = this.activeGameBoard.gameBoard[userPosition];
+      if (currentTile.colIndex !== 0) {
+        const newPosition = userPosition - 1;
+        this.movesToCommit.push(newPosition);
+        this.activeGameBoard.setUserToken(newPosition);
+        this.activeGameBoard.commitValidMove();
+        currentMovementAmount -= 1;
+      }
+    }
+    return currentMovementAmount;
   }
 }
