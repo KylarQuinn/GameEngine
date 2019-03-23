@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameTileComponent implements OnInit {
 
+  private inMoveList = true;
+
   constructor() { }
 
   ngOnInit() {

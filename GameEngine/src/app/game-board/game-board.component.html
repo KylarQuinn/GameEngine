@@ -5,13 +5,15 @@
         <td *ngFor="let column of columns; let colIndex = index">
           <div [ngSwitch]="getTileType(rowIndex,colIndex)">
             <div *ngSwitchCase="'SeaTile'">
-              <app-sea-tile></app-sea-tile>
+              <app-sea-tile ></app-sea-tile>
             </div>
             <div *ngSwitchCase="'LandTile'">
               <app-land-tile></app-land-tile>
             </div>
             <div *ngSwitchCase="'RoadTile'">
+              <div [class.tokenInMoveChain]="userMovesToCommit?.indexOf(rowIndex * 25 + colIndex) !== -1">
               <app-road-tile></app-road-tile>
+            </div>
             </div>
             <div *ngSwitchCase="'UserTile'">
               <app-user-token></app-user-token>

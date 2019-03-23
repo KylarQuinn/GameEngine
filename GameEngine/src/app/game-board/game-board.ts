@@ -5,7 +5,10 @@ export class GameBoard {
   public gameBoard: Array<GameTile>;
   private userPosition: number;
   private movementAmount: number;
-  private currentMovementAmount: number;
+/**
+ * This is the number of moves allowed.  This may change over the course of the game.
+ */
+  private movesAllowed: number;
 
   constructor() {
     this.gameBoard = new Array<GameTile>(GameConstants.TOTAL_COLUMNS * GameConstants.TOTAL_ROWS);
@@ -15,7 +18,7 @@ export class GameBoard {
       }
 
     }
-    this.movementAmount = this.currentMovementAmount = 3;
+    this.movementAmount = this.movesAllowed = 3;
     this.setUserToken(GameConstants.TalonLocation);
   }
 
@@ -40,10 +43,10 @@ export class GameBoard {
   }
 
   /**
-   * getCurrentMovementAmount
+   * This is the number of moves allowed.  This may change over the course of the game.
    */
-  public getCurrentMovementAmount() {
-    return this.currentMovementAmount;
+  public getCurrentMovesAllowed() {
+    return this.movesAllowed;
   }
 
   public getTileType(rowIndex: number, colIndex: number): string {

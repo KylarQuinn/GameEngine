@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { GameBoardService } from '../game-board/game-board-service.service';
 import { GameConstants } from '../game-constants/game-constants.constants';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-controller',
@@ -40,15 +41,18 @@ export class ControllerComponent implements OnInit {
     this.movesToCommit = this.gameBoardService.getMovesToCommit();
   }
 
-  onCommitMoves() {
-    for (let m of this.movesToCommit) {
-      this.gameBoardService.commitMoves(m);
-    }
+  onCommitMoves($event: any) {
+    // $event.stopPropagation();
+    // let x = 0;
+    // tslint:disable-next-line: prefer-for-of
+
+    this.gameBoardService.commitMoves();
 
     // Battles?
     // Event?
     // change location
     // remove the overlay
+    this.movesToCommit = [this.gameBoardService.getGameBoard().getUserPosition()];
     this.movementAmount = this.gameBoardService.getCurrentMovementAmount();
   }
 }
