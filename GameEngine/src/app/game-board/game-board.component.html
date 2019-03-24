@@ -10,10 +10,10 @@
             <div *ngSwitchCase="'LandTile'">
               <app-land-tile></app-land-tile>
             </div>
-            <div *ngSwitchCase="'RoadTile'">
+            <div *ngSwitchCase="'RoadTile'" [class.tokenInMoveChain]="userMovesToCommit?.indexOf(rowIndex * 25 + colIndex) !== -1">
               <div [class.tokenInMoveChain]="userMovesToCommit?.indexOf(rowIndex * 25 + colIndex) !== -1">
-              <app-road-tile></app-road-tile>
-            </div>
+                <app-road-tile></app-road-tile>
+              </div>
             </div>
             <div *ngSwitchCase="'UserTile'">
               <app-user-token></app-user-token>
